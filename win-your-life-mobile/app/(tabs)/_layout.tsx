@@ -13,6 +13,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarInactiveTintColor: "black", // Set inactive icon color to black
         headerShown: false,
         tabBarStyle: styles.tabBar,
       }}
@@ -62,10 +63,9 @@ export default function TabLayout() {
 
 const styles = StyleSheet.create({
   tabBar: {
-    // backgroundColor: "white",
+    backgroundColor: "#A04747",
     paddingBottom: 10,
     paddingTop: 10,
     height: 70,
-    borderTopColor: "#f0f0f0",
   },
 });

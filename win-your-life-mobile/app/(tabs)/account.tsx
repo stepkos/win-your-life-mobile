@@ -38,18 +38,18 @@ export default function AccountScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Hello, {data.name}!</ThemedText>
       </ThemedView>
-      <Button>
-        <ButtonText className="text-lg">Add friends</ButtonText>
+      <Button style={styles.button}>
+        <ButtonText  className="text-lg">Add friends</ButtonText>
       </Button>
       <View style={styles.streakContainer}>
-        <View style={styles.streakItem}>
+        <View style={styles.streakDays}>
           <Streak days={data.streakDays} type="fire" unit="days" />
         </View>
         <View style={styles.streakItem}>
           <Streak days={data.wonDays} type="won" unit="days" />
           <Streak days={data.wonWeeks} type="won" unit="weeks" />
         </View>
-        <View style={styles.streakItem}>
+        <View style={styles.streakLost}>
           <Streak days={data.lostDays} type="lost" unit="days" />
           <Streak days={data.lostWeeks} type="lost" unit="weeks" />
         </View>
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
+    backgroundColor:""
   },
   stepContainer: {
     gap: 8,
@@ -81,9 +82,29 @@ const styles = StyleSheet.create({
   streakItem: {
     justifyContent: "space-between",
     padding: 16,
-    borderColor: "#f0f0f0",
-    borderWidth: 1,
+    borderColor: "#D8A25E",
+    borderWidth: 5,
     borderRadius: 8,
     marginBottom: 8,
+  },
+  streakDays: {
+    justifyContent: "space-between",
+    padding: 16,
+    borderColor: "#FFB01E",
+    borderWidth: 5,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  streakLost: {
+    justifyContent: "space-between",
+    padding: 16,
+    borderColor: "#A04747",
+    borderWidth: 5,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  button: {
+    backgroundColor: "#E29330",
+    color: "#410B0B"
   },
 });

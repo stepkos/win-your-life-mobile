@@ -5,7 +5,13 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link";
+  type?:
+    | "default"
+    | "title"
+    | "titleAlt"
+    | "defaultSemiBold"
+    | "subtitle"
+    | "link";
 };
 
 export function ThemedText({
@@ -23,6 +29,7 @@ export function ThemedText({
         { color },
         type === "default" ? styles.default : undefined,
         type === "title" ? styles.title : undefined,
+        type === "titleAlt" ? styles.titleAlt : undefined,
         type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
         type === "subtitle" ? styles.subtitle : undefined,
         type === "link" ? styles.link : undefined,
@@ -45,12 +52,21 @@ const styles = StyleSheet.create({
     // fontWeight: "600",
     fontFamily: "FredokaSemiBold",
   },
-  title: {
+  titleAlt: {
     fontSize: 32,
     // fontWeight: "bold",
     lineHeight: 32,
     color: "#410B0B",
     backgroundColor: "#D8A25E",
+    padding: 10,
+    borderRadius: 5,
+    fontFamily: "FredokaSemiBold",
+  },
+  title: {
+    fontSize: 32,
+    // fontWeight: "bold",
+    lineHeight: 32,
+    color: "#D8A25E",
     padding: 10,
     borderRadius: 5,
     fontFamily: "FredokaSemiBold",

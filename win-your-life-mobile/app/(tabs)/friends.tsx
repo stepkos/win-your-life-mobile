@@ -1,9 +1,9 @@
+
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { StyleSheet, Image, Platform } from "react-native";
+import { StyleSheet, Image, Platform, View, FlatList } from "react-native";
 
 import { Collapsible } from "@/components/Collapsible";
 import { ExternalLink } from "@/components/ExternalLink";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import Streak from "@/components/Streak";
@@ -26,32 +26,36 @@ const fontSize = 20;
 
 export default function FriendsScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
-      headerImage={
-        <Ionicons size={310} name="code-slash" style={styles.headerImage} />
-      }
-    >
+    <View style={styles.viewComponent}>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Your friends</ThemedText>
       </ThemedView>
-      {data.map((friend) => (
-        <ThemedView key={friend.name} style={styles.friendContainer}>
-          <ThemedText>{friend.name}</ThemedText>
-          <Streak
-            days={friend.streak}
-            type="fire"
-            unit="days"
-            fontSize={fontSize}
-            iconSize={iconSize}
-          />
-        </ThemedView>
-      ))}
-    </ParallaxScrollView>
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.name}
+        renderItem={({ item }) => (
+          <View style={styles.friendContainer}>
+            <ThemedText>{item.name}</ThemedText>
+            <Streak
+              days={item.streak}
+              type="fire"
+              unit="days"
+              fontSize={fontSize}
+              iconSize={iconSize}
+            />
+          </View>
+        )}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  viewComponent: {
+    backgroundColor: "#343131",
+    paddingBottom: 100,
+    paddingTop: 50,
+  },
   headerImage: {
     color: "#808080",
     bottom: -90,

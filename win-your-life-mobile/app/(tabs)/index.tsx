@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     paddingTop: 32, // Adjust this value to ensure proper spacing under the sticky header
-    marginTop: 220, // Adding top margin to create space before CheckBoxList
-    paddingBottom:250,
+    marginTop: 160, // Adding top margin to create space before CheckBoxList
+    paddingBottom:165,
   },
   titleContainer: {
     flexDirection: "row",

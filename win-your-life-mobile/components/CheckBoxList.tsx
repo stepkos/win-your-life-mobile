@@ -1,7 +1,16 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Checkbox, CheckboxIndicator, CheckboxLabel } from "./ui/checkbox";
-import { View } from "react-native";
+import { View, LayoutAnimation, Platform, UIManager } from "react-native"; // Import LayoutAnimation and UIManager
 import { ThemedText } from "./ThemedText";
+import { useState } from "react"; // Import useState
+
+// Enable LayoutAnimation for Android
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 const data = [
   "Drink a glass of water in the morning",
@@ -22,14 +31,42 @@ const data = [
 ];
 
 export default function CheckBoxList() {
+  const [checkedItems, setCheckedItems] = useState<string[]>([]);
+
+  // Handler to toggle checked state
+  const handleCheck = (item: string) => {
+    // Animate layout change
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
+    setCheckedItems((prevChecked) => {
+      if (prevChecked.includes(item)) {
+        // If already checked, uncheck it
+        return prevChecked.filter((checkedItem) => checkedItem !== item);
+      } else {
+        // Otherwise, add it to checked
+        return [...prevChecked, item];
+      }
+    });
+  };
+
+  const uncheckedItems = data.filter((item) => !checkedItems.includes(item));
+  const checkedItemsAtBottom = data.filter((item) =>
+    checkedItems.includes(item)
+  );
+
+  // Combine unchecked first, checked at bottom
+  const reorderedData = [...uncheckedItems, ...checkedItemsAtBottom];
+
   return (
     <View className="gap-5">
-      {data.map((item: string) => (
+      {reorderedData.map((item: string) => (
         <Checkbox
           key={item}
           isInvalid={false}
           isDisabled={false}
           value={item}
+          isChecked={checkedItems.includes(item)} // Set checked state
+          onChange={() => handleCheck(item)} // Handle check/uncheck
           style={{
             width: "100%", // Custom width
             height: 50, // Custom height

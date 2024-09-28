@@ -7,10 +7,8 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.stickyHeader}>
-        <ThemedText type="title">Your streak is 10 days</ThemedText>
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Today's goals</ThemedText>
-        </ThemedView>
+        <ThemedText type="title" style={styles.stickyTitle}>Your streak is 10 days</ThemedText>
+        <ThemedText type="title" style={styles.stickyTitle}>Today's goals:</ThemedText>
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <CheckBoxList />
@@ -23,11 +21,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#343131",
+    
   },
   stickyHeader: {
     width: '100%',
-    padding: 32,
-    backgroundColor: "#343131",
+    padding: 20,
+    backgroundColor: "#A04747",
+
+    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
@@ -37,11 +38,15 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     paddingTop: 32, // Adjust this value to ensure proper spacing under the sticky header
     marginTop: 220, // Adding top margin to create space before CheckBoxList
+    paddingBottom:250,
   },
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 1,
-    padding: 16,
+    gap: 10,
+    padding: 1,
   },
+  stickyTitle: {
+    color: "#fff"
+  }
 });

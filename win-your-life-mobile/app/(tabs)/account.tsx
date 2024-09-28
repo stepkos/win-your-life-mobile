@@ -24,6 +24,9 @@ const data = {
   lostWeeks: 1,
 };
 
+const fontSize = 24;
+const iconSize = 48;
+
 export default function AccountScreen() {
   return (
     <ParallaxScrollView
@@ -45,15 +48,45 @@ export default function AccountScreen() {
       </Button>
       <View style={styles.streakContainer}>
         <View style={styles.streakDays}>
-          <Streak days={data.streakDays} type="fire" unit="days" />
+          <Streak
+            days={data.streakDays}
+            type="fire"
+            unit="days"
+            fontSize={fontSize}
+            iconSize={iconSize}
+          />
         </View>
         <View style={styles.streakItem}>
-          <Streak days={data.wonDays} type="won" unit="days" />
-          <Streak days={data.wonWeeks} type="won" unit="weeks" />
+          <Streak
+            days={data.wonDays}
+            type="won"
+            unit="days"
+            fontSize={fontSize}
+            iconSize={iconSize}
+          />
+          <Streak
+            days={data.wonWeeks}
+            type="won"
+            unit="weeks"
+            fontSize={fontSize}
+            iconSize={iconSize}
+          />
         </View>
         <View style={styles.streakLost}>
-          <Streak days={data.lostDays} type="lost" unit="days" />
-          <Streak days={data.lostWeeks} type="lost" unit="weeks" />
+          <Streak
+            days={data.lostDays}
+            type="lost"
+            unit="days"
+            fontSize={fontSize}
+            iconSize={iconSize}
+          />
+          <Streak
+            days={data.lostWeeks}
+            type="lost"
+            unit="weeks"
+            fontSize={fontSize}
+            iconSize={iconSize}
+          />
         </View>
       </View>
     </ParallaxScrollView>
@@ -65,7 +98,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor:""
+    backgroundColor: "",
   },
   stepContainer: {
     gap: 8,
@@ -107,6 +140,6 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#E29330",
-    color: "#410B0B"
+    color: "#410B0B",
   },
 });

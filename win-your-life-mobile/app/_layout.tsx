@@ -3,6 +3,8 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+
+import { setCustomText } from "react-native-global-props";
 import "@/global.css";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { useFonts } from "expo-font";
@@ -19,7 +21,9 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    FredokaRegular: require("../assets/fonts/Fredoka-Regular.ttf"),
+    FredokaBold: require("../assets/fonts/Fredoka-Bold.ttf"),
+    FredokaSemiBold: require("../assets/fonts/Fredoka-SemiBold.ttf"),
   });
 
   useEffect(() => {

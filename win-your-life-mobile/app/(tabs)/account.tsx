@@ -38,8 +38,10 @@ export default function AccountScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Hello, {data.name}!</ThemedText>
       </ThemedView>
-      <Button>
-        <ButtonText className="text-lg">Add friends</ButtonText>
+      <Button className="h-10">
+        <ButtonText className="text-lg">
+          <ThemedText style={{ color: "#000000" }}>Add Friends</ThemedText>
+        </ButtonText>
       </Button>
       <View style={styles.streakContainer}>
         <View style={styles.streakItem}>

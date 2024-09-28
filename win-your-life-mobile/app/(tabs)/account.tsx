@@ -39,7 +39,9 @@ export default function AccountScreen() {
         <ThemedText type="title">Hello, {data.name}!</ThemedText>
       </ThemedView>
       <Button style={styles.button}>
-        <ButtonText  className="text-lg">Add friends</ButtonText>
+        <ButtonText className="text-lg">
+          <ThemedText style={{ color: "#000000" }}>Add Friends</ThemedText>
+        </ButtonText>
       </Button>
       <View style={styles.streakContainer}>
         <View style={styles.streakDays}>

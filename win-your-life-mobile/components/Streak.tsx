@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { View, Text } from "react-native";
+import { ThemedText } from "./ThemedText";
 
 interface StreakProps {
   days: number;
@@ -15,9 +16,9 @@ export default function Streak({ days, type, unit }: StreakProps) {
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <Ionicons name={icon} size={48} color={color} />
-      <Text style={{ fontSize: 30, marginLeft: 10, color: color }}>
+      <ThemedText style={{ fontSize: 24, marginLeft: 10, color: color }}>
         {days} {unit}
-      </Text>
+      </ThemedText>
     </View>
   );
 }

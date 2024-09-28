@@ -17,7 +17,7 @@ import CheckBoxList from "@/components/CheckBoxList";
 export default function HomeScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+      headerBackgroundColor={{ light: "#D0D0D0", dark: "#343131" }}
       headerImage={<Ionicons size={310} name="home" style={styles.reactLogo} />}
     >
       <ThemedView style={styles.titleContainer}>
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
+
     marginBottom: 12,
   },
   stepContainer: {

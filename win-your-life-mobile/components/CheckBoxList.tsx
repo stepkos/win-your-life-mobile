@@ -11,16 +11,23 @@ export default function CheckBoxList() {
       {data.map((item: string) => (
         <Checkbox
           key={item}
-          size="lg"
           isInvalid={false}
           isDisabled={false}
           value={item}
-          className="gap-5"
+          style={{
+            width: "100%", // Custom width
+            height: 50, // Custom height
+            borderRadius: 10,
+            backgroundColor: "#D8A25E"
+          }}
+
         >
-          <CheckboxIndicator>
+          <CheckboxIndicator 
+          >
             <Ionicons name="checkmark-sharp" />
           </CheckboxIndicator>
-          <CheckboxLabel>
+
+          <CheckboxLabel style={{ color: "#410B0B", }}>
             <ThemedText>{item}</ThemedText>
           </CheckboxLabel>
         </Checkbox>

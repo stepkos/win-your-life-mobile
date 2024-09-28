@@ -9,7 +9,7 @@ interface StreakProps {
 }
 
 export default function Streak({ days, type, unit }: StreakProps) {
-  const color = type === "fire" ? "orange" : type === "won" ? "green" : "red";
+  const color = type === "fire" ? "#FFB01E" : type === "won" ? "#D8A25E" : "#A04747";
   const icon =
     type === "fire" ? "flame" : type === "won" ? "checkmark" : "skull-outline";
 

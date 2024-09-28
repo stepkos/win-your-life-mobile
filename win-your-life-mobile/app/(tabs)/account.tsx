@@ -15,13 +15,50 @@ import {
 } from "@/components/ui/button";
 import { Line } from "react-native-svg";
 
-const data = {
+interface StreakItem {
+  amount: number;
+  color: string;
+  type: "fire" | "won" | "lost";
+  unit: "days" | "weeks";
+}
+
+const data: {
+  name: string;
+  streakItems: StreakItem[];
+} = {
   name: "John Doe",
-  streakDays: 80,
-  wonDays: 71,
-  wonWeeks: 10,
-  lostDays: 9,
-  lostWeeks: 1,
+  streakItems: [
+    {
+      amount: 80,
+      color: "#FFB01E",
+      type: "fire",
+      unit: "days",
+    },
+    {
+      amount: 71,
+      color: "#D8A25E",
+      type: "won",
+      unit: "days",
+    },
+    {
+      amount: 10,
+      color: "#D8A25E",
+      type: "won",
+      unit: "weeks",
+    },
+    {
+      amount: 9,
+      color: "#A04747",
+      type: "lost",
+      unit: "days",
+    },
+    {
+      amount: 1,
+      color: "#A04747",
+      type: "lost",
+      unit: "weeks",
+    },
+  ],
 };
 
 const fontSize = 24;
@@ -47,47 +84,19 @@ export default function AccountScreen() {
         </ButtonText>
       </Button>
       <View style={styles.streakContainer}>
-        <View style={styles.streakDays}>
+        {data.streakItems.map((item, index) => (
           <Streak
-            days={data.streakDays}
-            type="fire"
-            unit="days"
+            key={index}
+            days={item.amount}
+            type={item.type}
+            unit={item.unit}
             fontSize={fontSize}
             iconSize={iconSize}
+            style={{
+              container: [styles.streakItem, { borderColor: item.color }],
+            }}
           />
-        </View>
-        <View style={styles.streakItem}>
-          <Streak
-            days={data.wonDays}
-            type="won"
-            unit="days"
-            fontSize={fontSize}
-            iconSize={iconSize}
-          />
-          <Streak
-            days={data.wonWeeks}
-            type="won"
-            unit="weeks"
-            fontSize={fontSize}
-            iconSize={iconSize}
-          />
-        </View>
-        <View style={styles.streakLost}>
-          <Streak
-            days={data.lostDays}
-            type="lost"
-            unit="days"
-            fontSize={fontSize}
-            iconSize={iconSize}
-          />
-          <Streak
-            days={data.lostWeeks}
-            type="lost"
-            unit="weeks"
-            fontSize={fontSize}
-            iconSize={iconSize}
-          />
-        </View>
+        ))}
       </View>
     </ParallaxScrollView>
   );
@@ -117,29 +126,13 @@ const styles = StyleSheet.create({
   streakItem: {
     justifyContent: "space-between",
     padding: 16,
-    borderColor: "#D8A25E",
-    borderWidth: 5,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  streakDays: {
-    justifyContent: "space-between",
-    padding: 16,
-    borderColor: "#FFB01E",
-    borderWidth: 5,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  streakLost: {
-    justifyContent: "space-between",
-    padding: 16,
-    borderColor: "#A04747",
-    borderWidth: 5,
+    borderWidth: 2,
     borderRadius: 8,
     marginBottom: 8,
   },
   button: {
     backgroundColor: "#E29330",
     color: "#410B0B",
+    height: 50,
   },
 });

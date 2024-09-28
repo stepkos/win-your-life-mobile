@@ -58,7 +58,7 @@ export default function CheckBoxList() {
   const reorderedData = [...uncheckedItems, ...checkedItemsAtBottom];
 
   return (
-    <View className="gap-5">
+    <View className="gap-5 flex-col items-center">
       {reorderedData.map((item: string) => (
         <Checkbox
           key={item}
@@ -68,20 +68,29 @@ export default function CheckBoxList() {
           isChecked={checkedItems.includes(item)} // Set checked state
           onChange={() => handleCheck(item)} // Handle check/uncheck
           style={{
-            width: "100%", // Custom width
+            width: "90%", // Custom width
             height: 50, // Custom height
             borderRadius: 10,
             borderColor: "#D8A25E",
-            borderWidth: 2,
+            borderWidth: 1,
             padding: 10,
           }}
         >
           <CheckboxIndicator>
-            <Ionicons name="checkmark-sharp" />
+            <Ionicons
+              name="checkmark-sharp"
+              color={checkedItems.includes(item) ? "#000" : "#fff"}
+            />
           </CheckboxIndicator>
 
           <CheckboxLabel style={{ color: "#410B0B" }}>
-            <ThemedText>{item}</ThemedText>
+            <ThemedText
+              className={
+                checkedItems.includes(item) ? "line-through text-gray-900" : ""
+              }
+            >
+              {item}
+            </ThemedText>
           </CheckboxLabel>
         </Checkbox>
       ))}

@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Checkbox, CheckboxIndicator, CheckboxLabel } from "./ui/checkbox";
 
 const data = ["medytacja", "2 litry wody", "basen", "fiszki", "20 min nauki"];
@@ -13,7 +14,9 @@ export default function CheckBoxList() {
           isDisabled={false}
           value={item}
         >
-          <CheckboxIndicator>{/* <CheckboxIcon as={} /> */}</CheckboxIndicator>
+          <CheckboxIndicator>
+            <Ionicons name="checkmark-sharp" />
+          </CheckboxIndicator>
           <CheckboxLabel>{item}</CheckboxLabel>
         </Checkbox>
       ))}

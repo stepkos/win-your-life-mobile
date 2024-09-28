@@ -13,8 +13,16 @@ import {
   ButtonIcon,
   ButtonGroup,
 } from "@/components/ui/button";
+import { Line } from "react-native-svg";
 
-const data = { name: "John Doe", streakDays: 80, wonDays: 71, lostDays: 9 };
+const data = {
+  name: "John Doe",
+  streakDays: 80,
+  wonDays: 71,
+  wonWeeks: 10,
+  lostDays: 9,
+  lostWeeks: 1,
+};
 
 export default function AccountScreen() {
   return (
@@ -34,9 +42,17 @@ export default function AccountScreen() {
         <ButtonText className="text-lg">Add friends</ButtonText>
       </Button>
       <View style={styles.streakContainer}>
-        <Streak days={data.streakDays} type="fire" />
-        <Streak days={data.wonDays} type="won" />
-        <Streak days={data.lostDays} type="lost" />
+        <View style={styles.streakItem}>
+          <Streak days={data.streakDays} type="fire" unit="days" />
+        </View>
+        <View style={styles.streakItem}>
+          <Streak days={data.wonDays} type="won" unit="days" />
+          <Streak days={data.wonWeeks} type="won" unit="weeks" />
+        </View>
+        <View style={styles.streakItem}>
+          <Streak days={data.lostDays} type="lost" unit="days" />
+          <Streak days={data.lostWeeks} type="lost" unit="weeks" />
+        </View>
       </View>
     </ParallaxScrollView>
   );
@@ -61,5 +77,13 @@ const styles = StyleSheet.create({
   },
   streakContainer: {
     gap: 8,
+  },
+  streakItem: {
+    justifyContent: "space-between",
+    padding: 16,
+    borderColor: "#f0f0f0",
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 8,
   },
 });

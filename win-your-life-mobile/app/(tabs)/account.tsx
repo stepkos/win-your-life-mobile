@@ -14,6 +14,9 @@ import {
   ButtonGroup,
 } from "@/components/ui/button";
 import { Line } from "react-native-svg";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { User } from "@/interfaces/User";
 
 interface StreakItem {
   amount: number;
@@ -61,8 +64,37 @@ const data: {
   ],
 };
 
-const fontSize = 24;
-const iconSize = 48;
+// const fontSize = 24;
+// const iconSize = 48;
+
+// const [data, setData] = useState<User>();
+// const [loading, setLoading] = useState(true);
+// const [error, setError] = useState<string | null>(null);
+
+// useEffect(() => {
+//   const fetchData = async () => {
+//     try {
+//       const response = await axios.get("http://46.41.142.19/djangofett/user", {
+//         headers: {
+//           Authorization:
+//             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI3NjcyNDU0LCJpYXQiOjE3Mjc1NjQ0NTQsImp0aSI6IjQyMjUyYjRmZDM4NzQ2MTdhODRjYThlNDE0MDVkOWI2IiwidXNlcl9pZCI6MSwiZW1haWwiOiJlbWFpbEBnbWFpbC5jb20ifQ.GAWW8IXq7fUrfMkKnzpn_1vlhhDeubXmIZpqh12bjUE",
+//         },
+//       });
+//       console.log(response.data);
+//       // setData(response.data); // Set the data in state
+//       // setLoading(false); // Stop loading indicator
+//     } catch (error) {
+//       if (axios.isAxiosError(error)) {
+//         setError(error.message);
+//       } else {
+//         setError("An unexpected error occurred");
+//       }
+//       setLoading(false); // Stop loading on error
+//     }
+//   };
+
+//   fetchData();
+// }, []);
 
 export default function AccountScreen() {
   return (

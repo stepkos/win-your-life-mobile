@@ -12,6 +12,7 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
+
 const initialData = [
   "Drink a glass of water in the morning",
   "Read for 30 minutes",
@@ -30,7 +31,11 @@ const initialData = [
   "Practice deep breathing",
 ];
 
-export default function CheckBoxList() {
+interface CheckBoxListProps {
+  data: string[];
+}
+
+export default function CheckBoxList({ data }: CheckBoxListProps) {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
   const [data, setData] = useState<string[]>(initialData);
   const [newTask, setNewTask] = useState<string>("");

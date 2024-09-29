@@ -5,6 +5,7 @@ import CheckBoxList from "@/components/CheckBoxList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Habit } from "@/interfaces/Habit";
+import { url, token } from "@/constants/Properties";
 
 export default function HomeScreen() {
   const [data, setData] = useState<Habit[]>([]);
@@ -15,15 +16,11 @@ export default function HomeScreen() {
     const fetchData = async () => {
       try {
         console.log("dupa");
-        const response = await axios.get(
-          "http://46.41.142.19/djangofett/habits/",
-          {
-            headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI3Njg3ODE3LCJpYXQiOjE3Mjc1Nzk4MTcsImp0aSI6IjA0NmJmMDBiMGNjNDQ0Y2I4ZGI1MjYzZGVlODNjYTY2IiwidXNlcl9pZCI6MSwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSJ9.DUiilVyKKEBSbj9z15QyIsahLlar5BTXu9kNg18Ra24",
-            },
-          }
-        );
+        const response = await axios.get(url + "/habits/", {
+          headers: {
+            Authorization: token,
+          },
+        });
         console.log("lol");
         // const response = await fetch("http://192.168.121.213:8000/habits/");
         // console.log("");

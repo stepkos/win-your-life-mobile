@@ -1,0 +1,3 @@
+export const url = "http://46.41.142.19/djangofett";
+export const token =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI3Njg3ODE3LCJpYXQiOjE3Mjc1Nzk4MTcsImp0aSI6IjA0NmJmMDBiMGNjNDQ0Y2I4ZGI1MjYzZGVlODNjYTY2IiwidXNlcl9pZCI6MSwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSJ9.DUiilVyKKEBSbj9z15QyIsahLlar5BTXu9kNg18Ra24";

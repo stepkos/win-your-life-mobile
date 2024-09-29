@@ -13,6 +13,8 @@ import {
 } from "react-native"; // Import TextInput and TouchableOpacity
 import { ThemedText } from "./ThemedText";
 import { useState } from "react"; // Import useState
+import axios from "axios";
+import { token, url } from "@/constants/Properties";
 
 // Enable LayoutAnimation for Android
 if (
@@ -21,24 +23,6 @@ if (
 ) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
-
-const initialData = [
-  "Drink a glass of water in the morning",
-  "Read for 30 minutes",
-  "Exercise for 20 minutes",
-  "Meditate for 10 minutes",
-  "Write in a journal",
-  "Plan your day",
-  "Take a walk",
-  "Eat a healthy breakfast",
-  "Practice gratitude",
-  "Learn a new skill",
-  "Limit social media use",
-  "Get 8 hours of sleep",
-  "Declutter your space",
-  "Connect with a friend",
-  "Practice deep breathing",
-];
 
 interface CheckBoxListProps {
   habits: string[];
@@ -67,10 +51,25 @@ export default function CheckBoxList({ habits }: CheckBoxListProps) {
   };
 
   // Handler to add a new task
-  const handleAddTask = () => {
+  const handleAddTask = async () => {
     if (newTask.trim()) {
-      setData((prevData) => [...prevData, newTask.trim()]);
-      setNewTask(""); // Clear the input field
+      try {
+        await axios.post(
+          url + "/habits/",
+          {
+            content: newTask.trim(), // Data (body) goes here
+          },
+          {
+            headers: {
+              Authorization: token, // Headers go here (note `Bearer`)
+            },
+          }
+        );
+        setData((prevData) => [...prevData, newTask.trim()]);
+        setNewTask(""); // Clear the input field
+      } catch (error) {
+        console.error("Failed to add new task:", error);
+      }
     }
   };
 

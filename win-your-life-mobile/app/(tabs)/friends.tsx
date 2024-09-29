@@ -63,11 +63,9 @@ export default function FriendsScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Your friends</ThemedText>
       </ThemedView>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.email}
-        renderItem={({ item }) => (
-          <View style={styles.friendContainer}>
+      <View style={styles.friendsList}>
+        {data.map((item) => (
+          <View key={item.email} style={styles.friendContainer}>
             <ThemedText>{item.user_info.first_name}</ThemedText>
             <Streak
               days={item.user_info.streak}
@@ -77,8 +75,8 @@ export default function FriendsScreen() {
               iconSize={iconSize}
             />
           </View>
-        )}
-      />
+        ))}
+      </View>
     </View>
   );
 }
@@ -105,6 +103,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingTop: 50,
     gap: 8,
+  },
+  friendsList: {
+    alignItems: "center",
   },
   friendContainer: {
     flexDirection: "row",

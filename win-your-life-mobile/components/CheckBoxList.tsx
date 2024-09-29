@@ -12,25 +12,29 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const data = [
-  "Drink a glass of water in the morning",
-  "Read for 30 minutes",
-  "Exercise for 20 minutes",
-  "Meditate for 10 minutes",
-  "Write in a journal",
-  "Plan your day",
-  "Take a walk",
-  "Eat a healthy breakfast",
-  "Practice gratitude",
-  "Learn a new skill",
-  "Limit social media use",
-  "Get 8 hours of sleep",
-  "Declutter your space",
-  "Connect with a friend",
-  "Practice deep breathing",
-];
+// const data = [
+//   "Drink a glass of water in the morning",
+//   "Read for 30 minutes",
+//   "Exercise for 20 minutes",
+//   "Meditate for 10 minutes",
+//   "Write in a journal",
+//   "Plan your day",
+//   "Take a walk",
+//   "Eat a healthy breakfast",
+//   "Practice gratitude",
+//   "Learn a new skill",
+//   "Limit social media use",
+//   "Get 8 hours of sleep",
+//   "Declutter your space",
+//   "Connect with a friend",
+//   "Practice deep breathing",
+// ];
 
-export default function CheckBoxList() {
+interface CheckBoxListProps {
+  data: string[];
+}
+
+export default function CheckBoxList({ data }: CheckBoxListProps) {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
   // Handler to toggle checked state

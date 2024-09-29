@@ -34,6 +34,7 @@ export default function CheckBoxList() {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
   const [data, setData] = useState<string[]>(initialData);
   const [newTask, setNewTask] = useState<string>("");
+  const [showInput, setShowInput] = useState<boolean>(true);
 
   // Handler to toggle checked state
   const handleCheck = (item: string) => {
@@ -69,6 +70,19 @@ export default function CheckBoxList() {
 
   return (
     <View style={styles.container}>
+      {showInput && (
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Add a new task"
+            value={newTask}
+            onChangeText={setNewTask}
+          />
+          <TouchableOpacity style={styles.addButton} onPress={handleAddTask}>
+            <Text style={styles.addButtonText}>Add</Text>
+          </TouchableOpacity>
+        </View>
+      )}
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View className="gap-5 flex-col items-center">
           {reorderedData.map((item: string) => (
@@ -101,17 +115,6 @@ export default function CheckBoxList() {
           ))}
         </View>
       </ScrollView>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Add a new task"
-          value={newTask}
-          onChangeText={setNewTask}
-        />
-        <TouchableOpacity style={styles.addButton} onPress={handleAddTask}>
-          <Text style={styles.addButtonText}>Add</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }
@@ -122,7 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#343131",
   },
   scrollViewContent: {
-    paddingBottom: 80, // Add padding to avoid content being hidden by the input field
+    paddingBottom:20, // Add padding to avoid content being hidden by the input field
   },
   checkbox: {
     width: "90%", // Custom width
@@ -139,10 +142,6 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 16,
     backgroundColor: "#343131",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
   },
   input: {
     flex: 1,
@@ -153,6 +152,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginRight: 8,
     backgroundColor: "#D8A25E",
+    color: "#fff",
+    
   },
   addButton: {
     backgroundColor: "#E29330", // Set button color

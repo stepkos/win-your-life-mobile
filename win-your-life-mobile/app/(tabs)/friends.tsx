@@ -53,7 +53,7 @@ export default function FriendsScreen() {
 const styles = StyleSheet.create({
   viewComponent: {
     backgroundColor: "#343131",
-    paddingBottom: 100,
+    paddingBottom: 50,
     paddingTop: 50,
   },
   headerImage: {
@@ -71,10 +71,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     gap: 8,
     padding: 10,
+
     paddingHorizontal: 16,
     borderRadius: 10,
     fontSize: fontSize,
     borderWidth: 1,
     borderColor: "#D8A25E",
+    marginBottom: 16, // Add margin to increase the gap between friends
   },
 });

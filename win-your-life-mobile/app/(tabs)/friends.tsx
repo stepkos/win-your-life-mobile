@@ -1,5 +1,3 @@
-
-
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { StyleSheet, Image, Platform, View, FlatList } from "react-native";
 import { useEffect, useState } from "react";

@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
     fontFamily: "FredokaRegular",
   },
   defaultSemiBold: {
-    fontSize: 16,
+    fontSize: 32,
     lineHeight: 24,
     // fontWeight: "600",s
-    fontFamily: "FredokaSemiBold",
+    fontFamily: "FredokaRegular",
   },
   titleAlt: {
     fontSize: 32,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontFamily: "FredokaSemiBold",
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 24,
     // fontWeight: "bold",
     fontFamily: "FredokaBold",
   },

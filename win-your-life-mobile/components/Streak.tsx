@@ -34,7 +34,7 @@ export default function Streak({
       <Ionicons name={icon} size={iconSize} color={color} />
       <ThemedText
         style={[
-          { fontSize: fontSize, marginLeft: 10, color: color },
+          { fontSize: fontSize, marginLeft: fontSize * 0.5, color: color },
           style.text,
         ]}
       >

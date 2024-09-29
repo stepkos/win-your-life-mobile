@@ -1,8 +1,16 @@
-import { Image, StyleSheet, View } from "react-native";
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
+import {
+  Image,
+  StyleSheet,
+  View,
+  Modal,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+  TouchableOpacity,
+} from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
 import Streak from "@/components/Streak";
 import { Button, ButtonText } from "@/components/ui/button";
 import axios from "axios";
@@ -19,9 +27,13 @@ export default function AccountScreen() {
   const fontSize = 24;
   const iconSize = 48;
 
-  const [data, setData] = useState<User | null>(null); // State to hold user data
-  const [loading, setLoading] = useState(true); // State to manage loading
-  const [error, setError] = useState<string | null>(null); // State for error handling
+  const [data, setData] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
+  const [friendEmail, setFriendEmail] = useState(""); // State for friend's email
+  const [friendError, setFriendError] = useState<string | null>(null); // Error handling for adding friend
+  const [successMessage, setSuccessMessage] = useState<string | null>(null); // Success message handling
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,21 +43,60 @@ export default function AccountScreen() {
             Authorization: token,
           },
         });
-        console.log(response.data.content);
-        setData(response.data.content); // Set the fetched data
-        setLoading(false); // Stop loading indicator
+        setData(response.data.content);
+        setLoading(false);
       } catch (error) {
         if (axios.isAxiosError(error)) {
-          setError(error.message); // Handle Axios errors
+          setError(error.message);
         } else {
-          setError("An unexpected error occurred"); // Handle general errors
+          setError("An unexpected error occurred");
         }
-        setLoading(false); // Stop loading on error
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
+
+  const handleOpenModal = () => {
+    setModalVisible(true); // Open the modal
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false); // Close the modal
+    setFriendEmail(""); // Clear the input field
+    setFriendError(null); // Clear error message
+    setSuccessMessage(null); // Clear success message
+  };
+
+  // Handle adding a friend with a POST request
+  const handleAddFriend = async () => {
+    if (!friendEmail.trim()) {
+      setFriendError("Email cannot be empty."); // Show error if email is empty
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        url + "/user/friend/",
+        { friend_email: friendEmail.trim() }, // Send the email as friend_email in the POST request body
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      setSuccessMessage("Friend added successfully!"); // Show success message
+      setFriendError(null); // Clear previous errors
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setFriendError(error.response?.data?.message || "Failed to add friend."); // Display error message
+      } else {
+        setFriendError("An unexpected error occurred");
+      }
+    }
+  };
 
   if (loading) {
     return (
@@ -78,11 +129,12 @@ export default function AccountScreen() {
           <ThemedView style={styles.titleContainer}>
             <ThemedText type="title">Hello, {data.first_name}!</ThemedText>
           </ThemedView>
-          <Button style={styles.button}>
+          <Button style={styles.button} onPress={handleOpenModal}>
             <ButtonText className="text-lg">
               <ThemedText style={{ color: "#000000" }}>Add Friends</ThemedText>
             </ButtonText>
           </Button>
+
           {/* Display the streak */}
           <View style={styles.streakContainer}>
             <Streak
@@ -96,6 +148,43 @@ export default function AccountScreen() {
               }}
             />
           </View>
+
+          {/* Modal for adding friends */}
+          <Modal
+            visible={modalVisible}
+            transparent={true}
+            animationType="slide"
+            onRequestClose={handleCloseModal} // Handle closing on Android back button
+          >
+            <TouchableWithoutFeedback onPress={handleCloseModal}>
+              <View style={styles.modalBackground}>
+                <TouchableWithoutFeedback onPress={() => null}>
+                  <View style={styles.modalContent}>
+                    <ThemedText style={styles.modalTitle}>Add a Friend</ThemedText>
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Friend's Email"
+                      value={friendEmail}
+                      onChangeText={setFriendEmail}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                    />
+                    {/* Show error message */}
+                    {friendError && (
+                      <ThemedText style={styles.errorText}>{friendError}</ThemedText>
+                    )}
+                    {/* Show success message */}
+                    {successMessage && (
+                      <ThemedText style={styles.successText}>{successMessage}</ThemedText>
+                    )}
+                    <Button style={styles.addButton} onPress={handleAddFriend}>
+                      <ButtonText>Add Friend</ButtonText>
+                    </Button>
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>
+            </TouchableWithoutFeedback>
+          </Modal>
         </>
       )}
     </ParallaxScrollView>
@@ -107,7 +196,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "",
   },
   reactLogo: {
     height: 300,
@@ -132,5 +220,46 @@ const styles = StyleSheet.create({
     color: "#410B0B",
     height: 50,
     marginVertical: 10,
+  },
+  modalBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background
+  },
+  modalContent: {
+    width: 300,
+    padding: 20,
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  input: {
+    width: "100%",
+    height: 40,
+    borderColor: "#D8A25E",
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    backgroundColor: "#F8F8F8",
+  },
+  addButton: {
+    backgroundColor: "#E29330",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+  },
+  errorText: {
+    color: "red",
+    marginBottom: 10,
+  },
+  successText: {
+    color: "green",
+    marginBottom: 10,
   },
 });

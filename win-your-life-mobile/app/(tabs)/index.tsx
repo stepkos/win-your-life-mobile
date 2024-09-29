@@ -15,13 +15,16 @@ export default function HomeScreen() {
     const fetchData = async () => {
       try {
         console.log("dupa");
-        const response = await axios.get("46.41.142.19/djangofett/habits/", {
-          headers: {
-            Authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI3NjgxOTQ2LCJpYXQiOjE3Mjc1NzM5NDYsImp0aSI6IjFkM2VjMjBkZDM0NDQyYTlhMTk0MzY2MjNjNzAwYTJjIiwidXNlcl9pZCI6MSwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSJ9.x1DiPlM-IrVNs1_nkmiuf4S-UI5zR7_DpWCPbp3AjKY",
-          },
-        });
-
+        const response = await axios.get(
+          "http://46.41.142.19/djangofett/habits/",
+          {
+            headers: {
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI3Njg3ODE3LCJpYXQiOjE3Mjc1Nzk4MTcsImp0aSI6IjA0NmJmMDBiMGNjNDQ0Y2I4ZGI1MjYzZGVlODNjYTY2IiwidXNlcl9pZCI6MSwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSJ9.DUiilVyKKEBSbj9z15QyIsahLlar5BTXu9kNg18Ra24",
+            },
+          }
+        );
+        console.log("lol");
         // const response = await fetch("http://192.168.121.213:8000/habits/");
         // console.log("");
         // const data = await response.json();
@@ -71,7 +74,7 @@ export default function HomeScreen() {
         </ThemedText>
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <CheckBoxList data={habits} />
+        <CheckBoxList habits={habits} />
       </ScrollView>
     </View>
   );
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
     paddingTop: 32, // Adjust this value to ensure proper spacing under the sticky header
 
     marginTop: 160, // Adding top margin to create space before CheckBoxList
-    paddingBottom:165,
+    paddingBottom: 165,
   },
   titleContainer: {
     flexDirection: "row",

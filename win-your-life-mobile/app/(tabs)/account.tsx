@@ -64,8 +64,8 @@ const data: {
   ],
 };
 
-// const fontSize = 24;
-// const iconSize = 48;
+const fontSize = 24;
+const iconSize = 48;
 
 // const [data, setData] = useState<User>();
 // const [loading, setLoading] = useState(true);

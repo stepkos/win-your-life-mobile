@@ -1,6 +1,16 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Checkbox, CheckboxIndicator, CheckboxLabel } from "./ui/checkbox";
-import { View, LayoutAnimation, Platform, UIManager, TextInput, TouchableOpacity, StyleSheet, Text, ScrollView } from "react-native"; // Import TextInput and TouchableOpacity
+import {
+  View,
+  LayoutAnimation,
+  Platform,
+  UIManager,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  ScrollView,
+} from "react-native"; // Import TextInput and TouchableOpacity
 import { ThemedText } from "./ThemedText";
 import { useState } from "react"; // Import useState
 
@@ -11,7 +21,6 @@ if (
 ) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
-
 
 const initialData = [
   "Drink a glass of water in the morning",
@@ -32,12 +41,12 @@ const initialData = [
 ];
 
 interface CheckBoxListProps {
-  data: string[];
+  habits: string[];
 }
 
-export default function CheckBoxList({ data }: CheckBoxListProps) {
+export default function CheckBoxList({ habits }: CheckBoxListProps) {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
-  const [data, setData] = useState<string[]>(initialData);
+  const [data, setData] = useState<string[]>(habits);
   const [newTask, setNewTask] = useState<string>("");
   const [showInput, setShowInput] = useState<boolean>(true);
 
@@ -110,7 +119,9 @@ export default function CheckBoxList({ data }: CheckBoxListProps) {
               <CheckboxLabel style={{ color: "#410B0B" }}>
                 <ThemedText
                   className={
-                    checkedItems.includes(item) ? "line-through text-gray-900" : ""
+                    checkedItems.includes(item)
+                      ? "line-through text-gray-900"
+                      : ""
                   }
                 >
                   {item}
@@ -130,7 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#343131",
   },
   scrollViewContent: {
-    paddingBottom:20, // Add padding to avoid content being hidden by the input field
+    paddingBottom: 20, // Add padding to avoid content being hidden by the input field
   },
   checkbox: {
     width: "90%", // Custom width
@@ -158,7 +169,6 @@ const styles = StyleSheet.create({
     marginRight: 8,
     backgroundColor: "#D8A25E",
     color: "#fff",
-    
   },
   addButton: {
     backgroundColor: "#E29330", // Set button color

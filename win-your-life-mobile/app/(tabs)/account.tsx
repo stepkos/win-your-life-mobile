@@ -91,7 +91,9 @@ export default function AccountScreen() {
       setFriendError(null); // Clear previous errors
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setFriendError(error.response?.data?.message || "Failed to add friend."); // Display error message
+        setFriendError(
+          error.response?.data?.message || "Failed to add friend."
+        ); // Display error message
       } else {
         setFriendError("An unexpected error occurred");
       }
@@ -119,7 +121,7 @@ export default function AccountScreen() {
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       headerImage={
         <Image
-          source={require("@/assets/images/john-cena.png")}
+          source={require("@/assets/images/profile-pic.webp")}
           style={styles.reactLogo}
         />
       }
@@ -160,7 +162,9 @@ export default function AccountScreen() {
               <View style={styles.modalBackground}>
                 <TouchableWithoutFeedback onPress={() => null}>
                   <View style={styles.modalContent}>
-                    <ThemedText style={styles.modalTitle}>Add a Friend</ThemedText>
+                    <ThemedText style={styles.modalTitle}>
+                      Add a Friend
+                    </ThemedText>
                     <TextInput
                       style={styles.input}
                       placeholder="Friend's Email"
@@ -171,14 +175,20 @@ export default function AccountScreen() {
                     />
                     {/* Show error message */}
                     {friendError && (
-                      <ThemedText style={styles.errorText}>{friendError}</ThemedText>
+                      <ThemedText style={styles.errorText}>
+                        {friendError}
+                      </ThemedText>
                     )}
                     {/* Show success message */}
                     {successMessage && (
-                      <ThemedText style={styles.successText}>{successMessage}</ThemedText>
+                      <ThemedText style={styles.successText}>
+                        {successMessage}
+                      </ThemedText>
                     )}
                     <Button style={styles.addButton} onPress={handleAddFriend}>
-                      <ButtonText style={styles.friendButton}>Add Friend</ButtonText>
+                      <ButtonText style={styles.friendButton}>
+                        Add Friend
+                      </ButtonText>
                     </Button>
                   </View>
                 </TouchableWithoutFeedback>
@@ -223,7 +233,7 @@ const styles = StyleSheet.create({
   },
   modalBackground: {
     flex: 1,
-    
+
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background

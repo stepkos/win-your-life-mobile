@@ -178,7 +178,7 @@ export default function AccountScreen() {
                       <ThemedText style={styles.successText}>{successMessage}</ThemedText>
                     )}
                     <Button style={styles.addButton} onPress={handleAddFriend}>
-                      <ButtonText>Add Friend</ButtonText>
+                      <ButtonText style={styles.friendButton}>Add Friend</ButtonText>
                     </Button>
                   </View>
                 </TouchableWithoutFeedback>
@@ -223,6 +223,7 @@ const styles = StyleSheet.create({
   },
   modalBackground: {
     flex: 1,
+    
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background
@@ -230,7 +231,7 @@ const styles = StyleSheet.create({
   modalContent: {
     width: 300,
     padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#A04747",
     borderRadius: 10,
     alignItems: "center",
   },
@@ -250,8 +251,8 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: "#E29330",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 1,
+    paddingHorizontal: 30,
     borderRadius: 10,
   },
   errorText: {
